@@ -59,7 +59,7 @@ function App({ signOut, user }) {
   }
 
   async function callEC2(){
-    fetch( "http://ec2-44-201-167-255.compute-1.amazonaws.com:8080/hello", { method:"GET"})
+    fetch( "https://ec2-54-221-37-29.compute-1.amazonaws.com/hello", { method:"GET"})
     .then(response => {
       //依回傳內容轉成需要的型態 
       return response.text()
