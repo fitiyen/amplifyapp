@@ -15,6 +15,7 @@ function App({ signOut, user }) {
   const [notes, setNotes] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
   const [apiEC2Data, setEC2Data] = useState("");
+  const [apiText, setAPI] = useState(process.env.REACT_APP_URL);
 
   useEffect(() => {
     fetchNotes();
@@ -59,7 +60,8 @@ function App({ signOut, user }) {
   }
 
   async function callEC2(){
-    fetch( "https://ec2-54-221-37-29.compute-1.amazonaws.com/hello", { method:"GET"})
+    var apiURL = apiText;
+    fetch( apiURL, { method:"GET"})
     .then(response => {
       //依回傳內容轉成需要的型態 
       return response.text()
@@ -106,6 +108,10 @@ function App({ signOut, user }) {
           ))
         }
       </div>
+      <input
+        onChange={e => setAPI(e.target.value)}
+        value={apiText}
+      />
       <button onClick={callEC2}>Call API</button>
       <p>{apiEC2Data}</p>
       <button onClick={signOut}>Sign out</button>
